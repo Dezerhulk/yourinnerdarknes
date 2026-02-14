@@ -1,0 +1,24 @@
+#include "Enemy.h"
+#include <iostream>
+
+Enemy::Enemy(std::string n, int h, int a, int xp)
+    : name(std::move(n)), hp(h), attack(a), xpReward(xp) {}
+
+void Enemy::specialAbility() {}
+
+int Enemy::getAttack() { return attack; }
+
+void Enemy::takeDamage(int dmg) {
+    hp -= dmg;
+    if (hp < 0) hp = 0;
+}
+
+bool Enemy::isAlive() const {
+    return hp > 0;
+}
+
+int Enemy::getXP() const { return xpReward; }
+
+void Enemy::printStats() const {
+    std::cout << name << " HP:" << hp << " ATK:" << attack << " XP:" << xpReward << "\n";
+}
