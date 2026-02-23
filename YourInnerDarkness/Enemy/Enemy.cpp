@@ -14,6 +14,8 @@ int Enemy::getAttack()
 void Enemy::takeDamage(int dmg)
 {
     hp -= dmg;
+    if (hp < 0)
+        hp = 0;
 }
 
 bool Enemy::isAlive() const

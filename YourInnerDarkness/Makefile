@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -g
+CXXFLAGS = -std=c++17 -Wall -Wextra -g -IGame -IPlayer -IEnemy -ISecurity
 SRCS = main.cpp Game/Game.cpp Player/Player.cpp Enemy/Enemy.cpp Enemy/ShadowBoss.cpp Enemy/EnemyFactory.cpp Security/Security.cpp
 TARGET = YourInnerDarkness
 

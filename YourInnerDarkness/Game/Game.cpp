@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "../Enemy/EnemyFactory.h"
 #include <iostream>
+#include <limits>
 
 void Game::run()
 {
@@ -23,16 +24,35 @@ void Game::fight()
 
     while (enemy->isAlive() && player.isAlive())
     {
-        std::cout << "Press 1 to attack > ";
-        int choice;
-        std::cin >> choice;
+        std::cout << "Press 1 to attack, 2 to defend > ";
+        int choice = 0;
+        
+        // Input validation with error checking
+        while (!(std::cin >> choice) || choice < 1 || choice > 2) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Invalid input! Press 1 to attack, 2 to defend > ";
+        }
 
-        enemy->takeDamage(player.getAttack());
+        // Apply player action
+        if (choice == 1) {
+            std::cout << "You attack!\n";
+            enemy->takeDamage(player.getAttack());
+        } else {
+            std::cout << "You defend!\n";
+        }
 
         enemy->specialAbility();
 
-        if (enemy->isAlive())
-            player.takeDamage(enemy->getAttack());
+        // Enemy attacks with reduced damage if player defended
+        if (enemy->isAlive()) {
+            int damage = enemy->getAttack();
+            if (choice == 2) {
+                damage = damage / 2;
+                std::cout << "(Reduced damage from defense)\n";
+            }
+            player.takeDamage(damage);
+        }
     }
 
     if (player.isAlive())

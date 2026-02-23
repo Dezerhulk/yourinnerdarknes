@@ -2,8 +2,8 @@
 
 class Player {
 private:
-    int hp = 100;
-    int attack = 15;
+    int hp = 150;
+    int attack = 20;
     int xp = 0;
 
 public:
